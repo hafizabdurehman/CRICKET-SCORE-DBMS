@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Account - Live Cricket</title>
+    <!-- Google Fonts for Modern Look -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="dark-theme">
+    <div class="glass-container auth-container">
+        <h2 class="text-center mb-4 text-white text-gradient">Save Your Favorites!</h2>
+        <p class="text-center text-light opacity-75 mb-4">Create an account to add your favorite cricket teams to the database.</p>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }} glass-alert">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        <form method="POST" action="{{ url_for('register') }}">
+            <div class="form-group">
+                <label class="text-light">Choose Username</label>
+                <input type="text" name="username" class="form-control glass-input" required autofocus>
+            </div>
+            <div class="form-group">
+                <label class="text-light">Choose Password</label>
+                <input type="password" name="password" class="form-control glass-input" required>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block glass-btn" style="background: var(--primary-gradient);">Create Account</button>
+        </form>
+        <p class="text-center mt-3 text-light opacity-75">Already have an account? <a href="{{ url_for('login') }}" class="text-info font-weight-bold">Login</a></p>
+        <div class="text-center mt-4">
+             <a href="{{ url_for('index') }}" class="text-muted"><small>← Back to Home</small></a>
+        </div>
+    </div>
+</body>
+</html>
